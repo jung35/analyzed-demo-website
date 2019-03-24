@@ -25,6 +25,7 @@ export default class ShowMaps extends React.Component {
 
     return (
       <div className="show_maps">
+        <label>Maps</label>
         <ul className="list-group">
           {sorted.map((map_name) => {
             const map_info = maps[map_name];

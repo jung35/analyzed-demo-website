@@ -7,6 +7,7 @@ export default class ShowStyle extends React.Component {
     selected_map_matches: PropTypes.array.isRequired,
     players: PropTypes.object.isRequired,
     white_list: PropTypes.array.isRequired,
+    exclude_list: PropTypes.array.isRequired,
     show_style: PropTypes.oneOf(["with", "exclude"]).isRequired,
     show_style_values: PropTypes.object.isRequired,
     show_maps: PropTypes.object.isRequired,
@@ -21,12 +22,13 @@ export default class ShowStyle extends React.Component {
 
     this.props.onChange(show_style);
 
-    const { show_style_values, white_list } = this.props;
+    const { show_style_values, white_list, exclude_list } = this.props;
+
     Object.keys(show_style_values).map((steam64Id) => {
       if (show_style === "with") {
         show_style_values[steam64Id] = white_list.indexOf(steam64Id) !== -1;
       } else {
-        show_style_values[steam64Id] = false;
+        show_style_values[steam64Id] = exclude_list.indexOf(steam64Id) !== -1;
       }
     });
 
@@ -65,6 +67,7 @@ export default class ShowStyle extends React.Component {
 
     return (
       <div className="show_style">
+        <label className="style-title">Players</label>
         <div className="btn-group btn-group-toggle">
           <label
             className={cx("btn btn-secondary", { active: style_with_players })}

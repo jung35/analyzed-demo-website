@@ -65,6 +65,7 @@
     "prefer-const": "error",
     "no-warning-comments": "warn",
     "react/jsx-no-target-blank": "off",
-    "no-fallthrough": "off"
+    "no-fallthrough": "off",
+    "react/no-direct-mutation-state": "off"
   }
 }

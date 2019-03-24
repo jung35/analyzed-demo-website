@@ -1,9 +1,10 @@
 import ReactDOM from "react-dom";
 import React from "react";
 
-import ShowStyle from "./options/ShowStyle";
-import ShowMaps from "./options/ShowMaps";
-import ShowStats from "./ShowStats";
+import ShowSide from "./OverallStats/options/ShowSide";
+import ShowStyle from "./OverallStats/options/ShowStyle";
+import ShowMaps from "./OverallStats/options/ShowMaps";
+import OverallStats from "./OverallStats";
 
 import request from "./request";
 
@@ -21,11 +22,25 @@ const white_list = [
   "76561198018221215", // will
 ];
 
+const exclude_list = [
+  "76561198070871681",
+  "76561198060823121",
+  "76561198041537792",
+  "76561198043141927",
+  "76561198348617774",
+  "76561198062484109",
+  "76561198029496853",
+  "76561198074227820",
+  "76561198047106765",
+  "76561198068667556",
+];
+
 class App extends React.Component {
   state = {
     list: null,
     players: {},
     maps: {},
+    show_side: "both",
     show_maps: {},
     show_style: "with",
     show_style_values: {},
@@ -167,6 +182,7 @@ class App extends React.Component {
       .filter((f) => f);
   };
 
+  onChangeSide = (show_side) => this.setState({ show_side });
   onChangeMap = (show_map) => this.setState({ show_map, matches: {} });
   onChangeStyle = (show_style) => this.setState({ show_style, matches: {} });
   onChangeStyleValue = (show_style_values) => this.setState({ show_style_values, matches: {} });
@@ -189,6 +205,7 @@ class App extends React.Component {
       list,
       players,
       maps,
+      show_side,
       show_style,
       show_style_values,
       show_maps,
@@ -209,6 +226,7 @@ class App extends React.Component {
               selected_map_matches={this.getSelectedMapMatches()}
               players={players}
               white_list={white_list}
+              exclude_list={exclude_list}
               show_style={show_style}
               show_style_values={show_style_values}
               show_maps={show_maps}
@@ -231,9 +249,11 @@ class App extends React.Component {
         </div>
         <div className="row">
           <div className="col">
-            <ShowStats
+            <ShowSide show_side={show_side} onChange={this.onChangeSide} />
+            <OverallStats
               loading={loading}
               matches={matches}
+              show_side={show_side}
               white_list={white_list}
               players={players}
             />
