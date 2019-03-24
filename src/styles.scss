@@ -52,4 +52,21 @@
 
 .get_stats {
   margin-top: 15px;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+
+  div {
+    margin-left: 10px;
+  }
+}
+
+table {
+  margin-top: 30px;
+}
+
+.ReactTable {
+  .rt-td {
+    text-align: center;
+  }
 }

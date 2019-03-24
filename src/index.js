@@ -167,9 +167,9 @@ class App extends React.Component {
       .filter((f) => f);
   };
 
-  onChangeMap = (show_map) => this.setState({ show_map });
-  onChangeStyle = (show_style) => this.setState({ show_style });
-  onChangeStyleValue = (show_style_values) => this.setState({ show_style_values });
+  onChangeMap = (show_map) => this.setState({ show_map, matches: {} });
+  onChangeStyle = (show_style) => this.setState({ show_style, matches: {} });
+  onChangeStyleValue = (show_style_values) => this.setState({ show_style_values, matches: {} });
 
   onClickGetStats = async () => {
     this.setState({ loading: true, matches: {} });
@@ -201,7 +201,7 @@ class App extends React.Component {
     }
 
     return (
-      <div className="container">
+      <div className="container-fluid">
         <div className="row">
           <div className="col">
             <ShowMaps maps={maps} show_maps={show_maps} onChange={this.onChangeMap} />
@@ -225,13 +225,18 @@ class App extends React.Component {
               onClick={this.onClickGetStats}
               disabled={loading}
             >
-              Get stats
+              Get stats {loading && <div className="spinner-border" role="status" />}
             </button>
           </div>
         </div>
         <div className="row">
           <div className="col">
-            <ShowStats loading={loading} matches={matches} white_list={white_list} />
+            <ShowStats
+              loading={loading}
+              matches={matches}
+              white_list={white_list}
+              players={players}
+            />
           </div>
         </div>
       </div>
