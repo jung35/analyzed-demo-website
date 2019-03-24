@@ -1,0 +1,55 @@
+.btn:not(:disabled) {
+  cursor: pointer;
+}
+
+.show_maps, .show_style {
+  padding: 30px 0 0;
+
+  .list-group {
+    max-height: 300px;
+    overflow: auto;
+    margin: 15px 0 0;
+    padding: 0 0 1px 1px;
+    flex-direction: row;
+    flex-wrap: wrap;
+
+    li {
+      display: flex;
+      justify-content: space-between;
+      flex: 1 0 15%;
+      cursor: pointer;
+      transition: background-color 180ms linear;
+      border-radius: 0;
+      margin: 0 0 -1px -1px;
+      font-size: 14px;
+
+      &:not(.active):hover {
+        background-color: rgba(#000, 0.03);
+      }
+
+      &.active {
+        color: #000;
+        background-color: #b2d7ff;
+        border-color: rgba(#000, 0.125);
+      }
+
+      .badge {
+        display: flex;
+        justify-content: center;
+        align-items: center;
+        padding: 0px 7px;
+        width: auto;
+        height: auto;
+        line-height: 100%;
+      }
+    }
+  }
+}
+
+.show_maps .list-group .list-group-item {
+  flex: 1 0 10%;
+}
+
+.get_stats {
+  margin-top: 15px;
+}
